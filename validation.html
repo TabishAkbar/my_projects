@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Validation</title>
+</head>
+<style>
+    body {
+        padding: 0%;
+        margin: 0%;
+        height: 100vh;
+        box-sizing: border-box;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(45deg, #4e65ff, #92effd);
+    }
+
+    #maindiv {
+        background-color: white;
+        height: 300px;
+        width: 500px;
+        box-shadow: 20px 20px rgba(0, 0, 0, 0.1);
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    h3 {
+
+
+        font-family: Tahoma;
+        color: rgb(141, 141, 141);
+        font-size: 25px;
+
+
+    }
+
+    :focus~.inpt {
+        background-color: white;
+    }
+
+    .inpt {
+
+        outline: none;
+        border: none;
+        border-bottom: 2px solid #cac9c9;
+        border-radius: 2px;
+        margin: 4%;
+        width: 70%;
+        height: 10%;
+    }
+
+    #btn {
+        cursor: pointer;
+        font-family: tahoma;
+        margin-top: 10px;
+        padding: 10px;
+        font-weight: 500;
+        position: relative;
+        left: -140px;
+        transition: .3s;
+        background-color: rgb(171, 128, 221);
+        border-radius: 100px;
+    }
+
+    .valid {
+        border-bottom: 2px solid rgb(52, 230, 52);
+    }
+
+    .valid1 {
+        border-bottom: 2px solid rgb(253, 88, 88);
+    }
+
+    .passvalid {
+        border-bottom: 2px solid rgb(52, 230, 52);
+    }
+
+    .passvalid1 {
+        border-bottom: 2px solid rgb(253, 88, 88);
+    }
+
+    .blank {
+        border-bottom: 2px solid #cac9c9;
+    }
+
+
+    #xx {
+        display: none;
+    }
+
+    #xx:checked~.notok {
+        transition: .3s;
+        left: 3px;
+    }
+
+    button {
+        visibility: hidden;
+    }
+</style>
+
+<body>
+    <form action="" id="form">
+
+        <div id="maindiv">
+            <input type="checkbox" name="" id="xx">
+            <h3>
+                Submission Form
+            </h3>
+            <input class="inpt" id="email" type="text" placeholder="Email" onkeyup="validate()">
+            <input class="inpt" id="paswrd" type="password" placeholder="Password " onkeyup="passvalid()">
+            <label for="xx" id="btn">Submit</label>
+
+        </div>
+    </form>
+    <script>
+
+        function validate() {
+            let form = document.getElementById('form');
+            let email = document.getElementById('email').value;
+
+            let pattern = /^[^]+@[^]+\.[a-z]{2,3}$/;
+            if (email.length == 0) {
+                document.getElementById('email').classList.add('blank')
+            }
+            else {
+                document.getElementById('email').classList.remove('blank')
+            }
+            if (email.match(pattern)) {
+                document.getElementById('email').classList.add('valid')
+                document.getElementById('email').classList.remove('valid1')
+                document.getElementById('btn').classList.add('allok')
+                document.getElementById('btn').classList.remove('notok')
+
+
+            }
+            else {
+                document.getElementById('email').classList.remove('valid')
+                document.getElementById('email').classList.add('valid1')
+                document.getElementById('btn').classList.add('notok')
+                document.getElementById('btn').classList.remove('allok')
+            }
+
+
+        }
+        function passvalid() {
+            let password1 = document.getElementById('paswrd').value;
+
+            let passpattern = /^[a-z,0-9]{8,99}$/;
+            if (password1.length == 0) {
+                document.getElementById('paswrd').classList.add('blank')
+                document.getElementById('paswrd').classList.remove('passvalid1')
+            }
+            else {
+                document.getElementById('paswrd').classList.remove('blank')
+            }
+            if (password1.match(passpattern)) {
+
+                document.getElementById('paswrd').classList.add('passvalid')
+                document.getElementById('paswrd').classList.remove('passvalid1')
+                document.getElementById('btn').classList.add('allok')
+                document.getElementById('btn').classList.remove('notok')
+
+            }
+            else {
+                document.getElementById('paswrd').classList.add('passvalid1')
+                document.getElementById('paswrd').classList.remove('passvalid')
+                document.getElementById('btn').classList.add('notok')
+                document.getElementById('btn').classList.remove('allok')
+            }
+            if (
+
+                document.getElementById('email').classList.contains('valid1')
+                || document.getElementById('paswrd').classList.contains('passvalid1') == true
+            ) {
+
+                document.getElementById('btn').classList.add('notok')
+            }
+            else {
+                document.getElementById('btn').classList.add('allok')
+
+            }
+        }
+
+    </script>
+</body>
+
+</html>
